@@ -11,10 +11,14 @@ express()
     root: __dirname + '/public'
   }))
   .get('/getRate', (req, res) => {
-    let rate = calculateRate.calculateRate(req, res);
+    let rate = Number((calculateRate.calculateRate(req, res)).toFixed(2));
+    let item_weight = req.query.item_weight;
+    let mail_type = calculateRate.getMailType(req, res);
     console.log("RATE: " + rate);
     let data = {
-      rate: rate
+      rate: rate,
+      item_weight: item_weight,
+      mail_type: mail_type
     };
     res.render('pages/getRate', data);
   })

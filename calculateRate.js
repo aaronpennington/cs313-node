@@ -24,7 +24,7 @@ function calculateRate(req, res) {
       }
       break;
     case "first-class":
-      return 99999;
+      return item_weight * 3.66;
       break;
     default:
       return -1;
@@ -32,6 +32,28 @@ function calculateRate(req, res) {
   }
 }
 
+
+function getMailType(req, res) {
+  let mail_type = req.query.mail_type;
+  switch (mail_type) {
+    case "stamped":
+      return "Stamped Letter";
+      break;
+    case "metered":
+      return "Metered Letter";
+      break;
+    case "flats":
+      return "Large Envelope (Flat)";
+      break;
+    case "first-class":
+      return "First-Class Package Service—Retail";
+    default:
+      return -1;
+      break;
+  }
+}
+
 module.exports = {
-  calculateRate: calculateRate
+  calculateRate: calculateRate,
+  getMailType: getMailType
 };
